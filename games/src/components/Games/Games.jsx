@@ -27,9 +27,16 @@ const games = [
   {
     id: 4,
     title: 'Sliding Image Puzzle',
-    description: '',
+    description: 'abc',
     image: '/images/.jpg',
     route: '/slidingImagePuzzle'
+  },
+  {
+    id: 5,
+    title: 'Word Find Game',
+    description: 'abc',
+    image: '/images/.jpg',
+    route: '/wordFindGame'
   },
 ];
 

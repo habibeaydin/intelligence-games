@@ -7,6 +7,7 @@ import Games from './components/Games/Games';
 import TicTacToe from './components/TicTacToe/TicTacToe';
 import MemoryGame from './components/MemoryGame/MemoryGame';
 import SlidingImagePuzzle from './components/SlidingImagePuzzle/SlidingImagePuzzle';
+import WordFindGame from './components/WordFindGame/WordFindGame';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/ticTacToe" element={<TicTacToe />} />
           <Route path="/memoryGame" element={<MemoryGame/>} />
           <Route path="/slidingImagePuzzle" element={<SlidingImagePuzzle/>} />
+          <Route path="/wordFindGame" element={<WordFindGame/>}/>
         </Routes>
       </div>
     </Router>
