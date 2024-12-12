@@ -1,0 +1,45 @@
+.tictactoe-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+}
+
+.ttt-h1{
+  color:#ea07ad
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-gap: 5px;
+}
+
+.cell {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ea07ad;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.cell.occupied {
+  cursor: not-allowed;
+}
+
+.reset-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color:#ef08ff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.reset-button:hover {
+  background-color: #f087f7;
+}

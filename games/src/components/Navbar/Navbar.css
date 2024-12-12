@@ -1,0 +1,82 @@
+.navbar{
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: linear-gradient(90deg, #7ea5ff, #ff758c);
+    padding: 15px 7%;
+}
+
+.logo{
+    width:100px; 
+    height: auto;
+    cursor: pointer;
+}
+
+.logo-name{
+    
+}
+
+ul{
+    flex: 1;
+    list-style: none;
+    text-align: center;
+}
+
+ul li{
+    display: inline-block;
+    margin: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;
+    color:#fff;
+}
+
+ul li a {
+    text-decoration: none;
+    color: inherit; /* Mevcut renk korunsun */
+    transition: all 0.3s ease; /* Geçiş animasyonu için */
+}
+
+ul li a:hover {
+    color: #fff; /* Hover sırasında renk değişimi */
+    font-size: 1.1em; /* Yazıyı biraz büyüt */
+    font-weight: bold; /* Yazının kalınlığını artır */
+    letter-spacing: 0.5px; /* Harfler arasını aç */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Hafif gölge ekle */
+}
+
+
+.settings-icon{
+    width: 50px;
+    cursor: pointer;
+    margin-left: 40px;
+}
+
+.search-box{
+    display: flex;
+    align-items: center;
+    background: radial-gradient(circle, #ff7eb3, #ff758c);
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.search-box input{
+    padding: 6px;
+    background: transparent;
+    border: 0;
+    outline:0;
+    color:#fff;
+    font-size: 18px;
+    max-width: 200px;
+}
+
+.search-box input::placeholder{
+    color: #fff;
+}
+
+.search-box img{
+    width: 20px;
+    cursor: pointer;
+}
+

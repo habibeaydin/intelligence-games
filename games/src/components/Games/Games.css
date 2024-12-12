@@ -1,0 +1,17 @@
+.games {
+    text-align: center;
+    padding: 20px;
+  }
+  
+  .games h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  .games-grid {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  

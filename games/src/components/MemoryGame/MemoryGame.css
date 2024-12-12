@@ -1,0 +1,84 @@
+.memory-game-container {
+    text-align: center;
+    margin-top: 60px;
+}
+  
+.memory-card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+  
+.memory-card {
+    width: 80px;
+    height: 100px;
+    cursor: pointer;
+    perspective: 1000px;
+    position: relative;
+}
+  
+.card-front,
+.card-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: transform 0.5s;
+}
+  
+.card-front {
+    background: white;
+    transform: rotateY(180deg); /* Başlangıçta kartın ön yüzü gizli */
+}
+  
+.card-back {
+    background: #e106fe;
+    color: white;
+    transform: rotateY(0); /* Kartın arka yüzü başlangıçta görünüyor */
+}
+  
+.flipped .card-front {
+    transform: rotateY(0); /* Kart çevrildiğinde ön yüz görünecek */
+}
+  
+.flipped .card-back {
+    transform: rotateY(-180deg); /* Kart çevrildiğinde arka yüz gizlenecek */
+}
+  
+.game-over {
+    color: green;
+    font-weight: bold;
+}
+  
+
+.game-over-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+  
+.game-over-screen h1 {
+    color: #4caf50;
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+  
+.game-over-screen p {
+    font-size: 1.5rem;
+    color: #333;
+}
+  
