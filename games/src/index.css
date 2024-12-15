@@ -1,12 +1,23 @@
-*{
+/* Genel sıfırlama ve font ayarları */
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: sans-serif;
 }
 
-.container{
-    width: 100vw;
-    min-height: 100vh;
+/* Sayfa genelinde kullanılacak stil ayarları */
+body, html {
+    height: 100%; /* Sayfanın tam yüksekliğini alır */
+}
+
+.container {
+    min-height: 100vh; /* Minimum sayfa yüksekliği */
+    display: flex;
+    flex-direction: column;
     background: #ced8ff;
+}
+
+.main-content {
+    flex: 1; /* İçeriğin maksimum alanı kaplamasını sağlar */
 }

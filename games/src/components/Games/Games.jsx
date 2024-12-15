@@ -2,37 +2,33 @@ import React from 'react';
 import GameCard from '../../components/GameCard/GameCard';
 import './Games.css';
 import memoryImage from '../../assets/memory.png';
-import tictactoeImage from '../../assets/tictactoe.png';
-import puzzle from '../../assets/puzzle.png';
-import wordImage from '../../assets/word.png';
+import tictactoeImage from '../../assets/ttt3.png';
+import image from '../../assets/image2.jpeg';
+import wordimg  from '../../assets/wordimg.jpeg';
 
 const games = [
   {
     id: 1,
     title: 'Hafıza Oyunu',
-    description: 'Kartları eşleştirerek hafızanızı test edin.',
     image: memoryImage,
     route: '/memoryGame'
   },
   {
     id: 2,
     title: 'Tic Tac Toe',
-    description: 'Verilen ipuçlarına göre kelimeyi tahmin edin.',
     image: tictactoeImage,
     route: '/ticTacToe'
   },
   {
     id: 3,
     title: 'Sliding Image Puzzle',
-    description: 'abc',
-    image: puzzle,
+    image: image,
     route: '/slidingImagePuzzle'
   },
   {
     id: 4,
     title: 'Word Find Game',
-    description: 'abc',
-    image: wordImage,
+    image: wordimg,
     route: '/wordFindGame'
   },
 ];
