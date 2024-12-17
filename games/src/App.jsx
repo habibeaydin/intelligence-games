@@ -9,7 +9,6 @@ import MemoryGame from './components/MemoryGame/MemoryGame';
 import SlidingImagePuzzle from './components/SlidingImagePuzzle/SlidingImagePuzzle';
 import WordFindGame from './components/WordFindGame/WordFindGame';
 import Footer from './components/Footer/Footer';
-import About from './components/About/About';
 
 function App() {
   return (
@@ -24,7 +23,6 @@ function App() {
             <Route path="/memoryGame" element={<MemoryGame />} />
             <Route path="/slidingImagePuzzle" element={<SlidingImagePuzzle />} />
             <Route path="/wordFindGame" element={<WordFindGame />} />
-            <Route path="/about" element={<About/>}/>
           </Routes>
         </main>
         <Footer />

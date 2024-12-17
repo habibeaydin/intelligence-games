@@ -1,66 +1,106 @@
+/* Genel Home Ayarları */
 .home {
     text-align: center;
-    padding: 20px;
+    background: linear-gradient(to bottom, #fff7f0, #ffebf0);
+    min-height: 100vh;
+    padding: 20px 10px;
+    overflow: hidden;
+    position: relative;
   }
   
-  .home-header {
-    background: linear-gradient(90deg, #7ea5ff, #ff758c);
+  /* Hero Section */
+  .home-hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(135deg, #7ea5ff, #ff758c);
     color: white;
-    padding: 50px 20px;
-    border-radius: 10px;
+    padding: 40px 60px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
   
-  .home-header h1 {
-    font-size: 36px;
+  .hero-content {
+    max-width: 500px;
+    text-align: left;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .hero-content p {
+    font-size: 1.2rem;
     margin-bottom: 20px;
   }
   
-  .home-header p {
-    font-size: 18px;
-    line-height: 1.6;
-  }
-
-  .home-features {
+  .hero-buttons {
     display: flex;
-    justify-content: space-around;
-    margin-top: 30px;
-    background: #f4f4f4;
-    padding: 50px 20px;
-    border-radius: 10px;
+    gap: 10px;
   }
-
-  .home-features p{
-    color:#555;
+  
+  .explore-button,
+  .about-button {
+    background: white;
+    color: #ff758c;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
-
-  .home-features {
+  
+  .explore-button:hover,
+  .about-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .hero-animation {
+    flex-shrink: 0;
+  }
+  
+  /* Benefits Section */
+  .benefits h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .benefits-grid {
     display: flex;
-    align-items: center;
-    margin-top: 30px;
-    background: #f4f4f4;
-    padding: 50px 20px;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  
+  .benefit-card {
+    background: white;
     border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 250px;
+    transition: transform 0.3s ease;
   }
   
-  .feature-image img {
-    width: 30%;
-    max-width: 500px; /* Resmin genişliği */
-    height: auto;
-    border-radius: 50px;
+  .benefit-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   
-  .feature-text {
-    width: 50%;
+  .benefit-card h3 {
+    margin-top: 10px;
+    color: #ff758c;
   }
   
-  .feature-text p {
+  .benefit-card p {
     color: #555;
-    font-size: 18px;
-    line-height: 1.6;
+    font-size: 1rem;
+    margin-top: 5px;
   }
   
-.home-box{
-  margin:30px 5px;
-}
- 
+  
   
