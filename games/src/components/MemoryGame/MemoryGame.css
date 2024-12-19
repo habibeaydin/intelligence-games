@@ -1,84 +1,169 @@
-.memory-game-container {
+.memory-game {
     text-align: center;
-    margin-top: 60px;
-}
+    background: linear-gradient(to bottom, #f0f8ff, #ffebf0);
+    min-height: 100vh;
+    padding: 20px;
+  }
   
-.memory-card-grid {
+.memory-game h1 {
+    color: #333;
+    margin: 20px;
+    font-size: 2.5rem;
+  }
+  
+  .memory-game  p {
+    font-size: 1.2rem;
+    color: #666;
+  }
+  
+  .card-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    max-width: 400px;
-    margin: 0 auto;
-}
+    grid-template-columns: repeat(4, 100px);
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+  }
   
-.memory-card {
-    width: 80px;
+  .memory-card {
+    width: 100px;
     height: 100px;
-    cursor: pointer;
-    perspective: 1000px;
-    position: relative;
-}
+    perspective: 1000px; /* 3D perspektif */
+  }
   
-.card-front,
-.card-back {
+  .card-inner {
+    position: relative;
     width: 100%;
     height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+  }
+  
+  .memory-card.flipped .card-inner {
+    transform: rotateY(180deg); /* Kart çevirme animasyonu */
+  }
+  
+  .card-front,
+  .card-back {
     position: absolute;
+    width: 100%;
+    height: 100%;
     backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #fff;
+  }
+  
+  .card-front {
+    background-color: #fbcf4d;
+    transform: rotateY(180deg); /* Kart ön yüzü */
+  }
+  
+  .card-back {
+    background-color: #7ea5ff; /* Kart arka yüzü */
+  }
+  
+  .win-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .reset-button {
+    margin-top: 20px;
+    background: linear-gradient(90deg, #ff85a2, #ff758c);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+  }
+  .game-stats {
     display: flex;
     justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: transform 0.5s;
-}
-  
-.card-front {
-    background: white;
-    transform: rotateY(180deg); /* Başlangıçta kartın ön yüzü gizli */
-}
-  
-.card-back {
-    background: #e106fe;
-    color: white;
-    transform: rotateY(0); /* Kartın arka yüzü başlangıçta görünüyor */
-}
-  
-.flipped .card-front {
-    transform: rotateY(0); /* Kart çevrildiğinde ön yüz görünecek */
-}
-  
-.flipped .card-back {
-    transform: rotateY(-180deg); /* Kart çevrildiğinde arka yüz gizlenecek */
-}
-  
-.game-over {
-    color: green;
-    font-weight: bold;
-}
-  
-
-.game-over-screen {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-  
-.game-over-screen h1 {
-    color: #4caf50;
-    font-size: 2.5rem;
-    margin-bottom: 10px;
-}
-  
-.game-over-screen p {
-    font-size: 1.5rem;
+    gap: 20px;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
     color: #333;
-}
+    font-weight: bold;
+  }
+  
+  .game-stats p {
+    background: #fff;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .win-screen p {
+    font-size: 1.2rem;
+    margin-top: 10px;
+    color: #ff758c;
+  }
+  
+  .reset-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .game-container {
+    background: #ffffff;
+    border: 5px solid #7ea5ff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    max-width: 500px; /* Maksimum genişlik ayarı */
+    margin: 0 auto; /* Ortalamak için */
+    margin-top: 20px;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 100px);
+    gap: 15px;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .game-stats {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .memory-card {
+    width: 100px;
+    height: 100px;
+    perspective: 1000px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .memory-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .reset-button {
+    background: linear-gradient(90deg, #ff758c, #7ea5ff);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .reset-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
   

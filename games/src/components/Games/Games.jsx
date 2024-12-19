@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Lottie from 'lottie-react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Games.css';
 
 // Lottie Animasyonlarını İçe Aktar
@@ -7,7 +8,7 @@ import MemoryGameAnimation from '../../assets/memory.json';
 import TicTacToeAnimation from '../../assets/ttt.json';
 import SlidingPuzzleAnimation from '../../assets/puzzle.json';
 import WordFindAnimation from '../../assets/word.json';
-import { Link } from 'react-router-dom';
+import LoadingAnimation from '../../assets/load.json'; // Yükleme animasyonu
 
 const games = [
   {
@@ -44,30 +45,49 @@ const games = [
   },
 ];
 
-const About = () => {
+const Games = () => {
+  const [loading, setLoading] = useState(false); // Yükleme durumu
+  const navigate = useNavigate();
+
+  const handlePlayGame = (route) => {
+    setLoading(true);
+    setTimeout(() => {
+      navigate(route);
+      setLoading(false);
+    }, 2500); //yükleme süresi
+  };
+
   return (
-    <div className="about">
-      <header className="about-header">
+    <div className="games">
+      <header className="games-header">
         <h1>Games</h1>
+        <p>Explore our fun and interactive games to challenge and enhance your skills!</p>
       </header>
       <div className="games-list">
         {games.map((game) => (
           <div key={game.id} className="game-card">
             <div className="game-animation">
-              <Lottie animationData={game.animation} style={{ height: 150, marginBottom: 10 }} />
+              <Lottie animationData={game.animation} style={{ height: 150 }} />
             </div>
             <h3>{game.title}</h3>
             <p>{game.description}</p>
             <h4>How to Play:</h4>
             <p>{game.howToPlay}</p>
-            <Link to={game.route}>
-              <button className="play-button">Play {game.title}</button>
-            </Link>
+            <button className="play-button" onClick={() => handlePlayGame(game.route)}>
+              Play {game.title}
+            </button>
           </div>
         ))}
       </div>
+
+      {loading && (
+        <div className="loading-overlay">
+          <Lottie animationData={LoadingAnimation} style={{ height: 350 }} />
+          <p>Loading Game...</p>
+        </div>
+      )}
     </div>
   );
 };
 
-export default About;
+export default Games;

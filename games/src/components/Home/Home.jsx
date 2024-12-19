@@ -16,9 +16,6 @@ const Home = () => {
             <Link to="/games">
               <button className="explore-button">Explore Games</button>
             </Link>
-            <Link to="/about">
-              <button className="about-button">Learn More</button>
-            </Link>
           </div>
         </div>
         <div className="hero-animation">
