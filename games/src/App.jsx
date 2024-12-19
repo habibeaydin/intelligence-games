@@ -6,7 +6,7 @@ import Home from './components/Home/Home';
 import Games from './components/Games/Games';
 import TicTacToe from './components/TicTacToe/TicTacToe';
 import MemoryGame from './components/MemoryGame/MemoryGame';
-import SlidingImagePuzzle from './components/SlidingImagePuzzle/SlidingImagePuzzle';
+import Puzzle from './components/Puzzle/Puzzle';
 import WordFindGame from './components/WordFindGame/WordFindGame';
 import Footer from './components/Footer/Footer';
 
@@ -21,7 +21,7 @@ function App() {
             <Route path="/games" element={<Games />} />
             <Route path="/ticTacToe" element={<TicTacToe />} />
             <Route path="/memoryGame" element={<MemoryGame />} />
-            <Route path="/slidingImagePuzzle" element={<SlidingImagePuzzle />} />
+            <Route path="/puzzle" element={<Puzzle />} />
             <Route path="/wordFindGame" element={<WordFindGame />} />
           </Routes>
         </main>

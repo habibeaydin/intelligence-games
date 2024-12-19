@@ -1,0 +1,49 @@
+.jigsaw-puzzle {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(to bottom, #f0f8ff, #ffebf0);
+  min-height: 100vh;
+}
+
+.jigsaw-puzzle h1 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+}
+
+.puzzle-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 310px;
+  height: 310px;
+  border: 2px solid #7ea5ff;
+  border-radius: 10px;
+  background: white;
+}
+
+.puzzle-piece {
+  width: 100px;
+  height: 100px;
+  background-size: 300px 300px;
+  border: 1px solid #ccc;
+  cursor: grab;
+}
+
+.win-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.win-screen h2 {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  color: #7ea5ff;
+}

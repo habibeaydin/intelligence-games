@@ -29,11 +29,11 @@ const games = [
   },
   {
     id: 3,
-    title: 'Sliding Image Puzzle',
+    title: 'Puzzle',
     description: 'Rearrange the pieces of the image to solve the puzzle.',
     howToPlay: 'Slide tiles to arrange them in the correct order.',
     animation: SlidingPuzzleAnimation,
-    route: '/slidingImagePuzzle',
+    route: '/puzzle',
   },
   {
     id: 4,
