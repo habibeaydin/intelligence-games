@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './WordFindGame.css';
 
-// Kelimeler ve ipuçları
+// Word list with hints
 const wordList = [
   { word: 'apple', hint: 'A fruit that keeps the doctor away' },
   { word: 'dog', hint: 'A common pet animal' },
@@ -11,29 +11,34 @@ const wordList = [
 ];
 
 const WordFindGame = () => {
-  // Rastgele bir kelime seçme
-  const getRandomWord = () => {
-    const randomIndex = Math.floor(Math.random() * wordList.length);
-    return wordList[randomIndex];
-  };
-
   const [word, setWord] = useState('');
   const [hint, setHint] = useState('');
   const [shuffledLetters, setShuffledLetters] = useState([]);
   const [selectedLetters, setSelectedLetters] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  const [time, setTime] = useState(0);
+  const [wordCount, setWordCount] = useState(0);
+  const [win, setWin] = useState(false);
+  const [currentCorrectLetters, setCurrentCorrectLetters] = useState([]);
 
-  // Oyun başlatma
   useEffect(() => {
-    const { word, hint } = getRandomWord();
-    setWord(word);
-    setHint(hint);
-    setShuffledLetters(shuffleArray(word.split('')));
-    setSelectedLetters([]);
-    setGameOver(false);
+    startNewWord();
+    startTimer();
+    return () => clearInterval(timerRef);
   }, []);
 
-  // Harfleri karıştırma
+  const timerRef = React.useRef(null);
+
+  const startTimer = () => {
+    timerRef.current = setInterval(() => {
+      setTime((prevTime) => prevTime + 1);
+    }, 1000);
+  };
+
+  const stopTimer = () => {
+    clearInterval(timerRef.current);
+  };
+
   const shuffleArray = (array) => {
     let shuffled = [...array];
     for (let i = shuffled.length - 1; i > 0; i--) {
@@ -43,96 +48,99 @@ const WordFindGame = () => {
     return shuffled;
   };
 
-  // Kullanıcının harf tıklaması
+  const startNewWord = () => {
+    const randomWord = wordList[wordCount % wordList.length];
+    setWord(randomWord.word);
+    setHint(randomWord.hint);
+    setShuffledLetters(shuffleArray(randomWord.word.split('')));
+    setSelectedLetters([]);
+    setCurrentCorrectLetters([]);
+    setGameOver(false);
+  };
+
   const handleLetterClick = (letter) => {
-    // Aynı harfi seçmemek için, sadece o harf eksikse seçilebilir
     const currentWord = selectedLetters.join('');
     const currentCount = currentWord.split(letter).length - 1;
     const wordCount = word.split(letter).length - 1;
 
     if (currentCount < wordCount) {
       setSelectedLetters([...selectedLetters, letter]);
+      const correctLetters = [...currentCorrectLetters, letter];
+      setCurrentCorrectLetters(correctLetters);
     }
   };
 
-  // Kelimeyi kontrol etme
   const checkWord = () => {
     if (selectedLetters.join('') === word) {
+      if (wordCount + 1 === 5) {
+        stopTimer();
+        setWin(true);
+      } else {
+        setWordCount((prevCount) => prevCount + 1);
+        startNewWord();
+      }
+    } else {
       setGameOver(true);
     }
   };
 
-  // Kelimenin doğru olup olmadığını kontrol etme
-  const checkWin = () => {
-    return selectedLetters.join('') === word;
-  };
-
-  // Yeniden başlatmak için
-  const restartGame = () => {
-    const { word, hint } = getRandomWord();
-    setWord(word);
-    setHint(hint);
-    setShuffledLetters(shuffleArray(word.split('')));
+  const resetCurrentWord = () => {
     setSelectedLetters([]);
-    setGameOver(false);
-  };
-
-  // Karıştırılmış harfleri render etme
-  const renderShuffledLetters = () => {
-    return shuffledLetters.map((letter, index) => (
-      <button
-        key={index}
-        className="letter-button"
-        onClick={() => handleLetterClick(letter)}
-        disabled={selectedLetters.filter(l => l === letter).length >= word.split(letter).length}
-      >
-        {letter}
-      </button>
-    ));
-  };
-
-  // Seçilen harfleri render etme
-  const renderSelectedLetters = () => {
-    return selectedLetters.map((letter, index) => (
-      <span key={index} className="selected-letter">
-        {letter}
-      </span>
-    ));
+    setCurrentCorrectLetters([]);
   };
 
   return (
-    <div className="game-container">
+    <div className="word-game-container">
       <h1>Word Find Game</h1>
-      <div className="hint">
+      <div className="word-hint">
         <p>Hint: {hint}</p>
       </div>
-
-      <div className="shuffled-letters">
-        {renderShuffledLetters()}
+      <div className="word-timer">Time: {time} sec</div>
+      <div className="word-shuffled-letters">
+        {shuffledLetters.map((letter, index) => (
+          <button
+            key={index}
+            className="word-letter-button"
+            onClick={() => handleLetterClick(letter)}
+            disabled={selectedLetters.filter((l) => l === letter).length >= word.split(letter).length}
+          >
+            {letter}
+          </button>
+        ))}
       </div>
-
-      <div className="selected-letters">
-        {renderSelectedLetters()}
+      <div className="word-selected-letters">
+        {selectedLetters.map((letter, index) => (
+          <span key={index} className="word-selected-letter">
+            {letter}
+          </span>
+        ))}
       </div>
-
-      <div className="check-button">
-        <button onClick={checkWord} disabled={selectedLetters.length !== word.length}>
-          Check Word
-        </button>
+      <div className="word-correct-letters">
+        <p>Correct Letters: {currentCorrectLetters.join(' ')}</p>
       </div>
-
-      {gameOver && (
-        <div className="game-over">
-          <p>Congratulations! You found the word: {word}</p>
-          <button onClick={restartGame}>Start New Game</button>
+      {!gameOver && !win && (
+        <div className="word-check-button">
+          <button onClick={checkWord} disabled={selectedLetters.length !== word.length}>
+            Check Word
+          </button>
         </div>
       )}
-
-      {!gameOver && selectedLetters.length === word.length && !checkWin() && (
-        <div className="game-over">
+      {gameOver && !win && (
+        <div className="word-game-over">
           <p>Oops! Try Again!</p>
+          <button onClick={startNewWord}>Next Word</button>
         </div>
       )}
+      {win && (
+        <div className="word-game-over">
+          <p>Congratulations! You completed all words!</p>
+          <p>Your Time: {time} sec</p>
+          <button onClick={startNewWord}>Play Again</button>
+        </div>
+      )}
+      <div className="word-reset-button">
+        <button onClick={resetCurrentWord}>Reset Current Word</button>
+      </div>
     </div>
   );
 };

@@ -1,0 +1,87 @@
+/* Genel Stil */
+.login-container {
+    text-align: center;
+    background: linear-gradient(to bottom, #f0f8ff, #ffebf0);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  
+  .login-card {
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-card h1 {
+    font-size: 2rem;
+    color: #ff758c;
+    margin-bottom: 20px;
+  }
+  
+  .login-error {
+    color: #ff4f4f;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .login-form input {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+  }
+  
+  .login-form input:focus {
+    border-color: #ff758c;
+    box-shadow: 0 0 5px rgba(255, 117, 140, 0.5);
+    outline: none;
+  }
+  
+  .login-button {
+    background: linear-gradient(to right, #ff758c, #7ea5ff);
+    color: white;
+    font-size: 1rem;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .login-button:hover {
+    background: linear-gradient(to right, #7ea5ff, #ff758c);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  .login-button:active {
+    transform: scale(0.98);
+  }
+  
+  @media (max-width: 768px) {
+    .login-card {
+      padding: 20px;
+    }
+  
+    .login-form input {
+      font-size: 0.9rem;
+    }
+  
+    .login-button {
+      font-size: 0.9rem;
+    }
+  }
+  

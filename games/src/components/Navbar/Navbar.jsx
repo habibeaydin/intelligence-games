@@ -1,11 +1,20 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import './Navbar.css';
-import logo from '../../assets/logo.png';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCog, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
+import "./Navbar.css";
+import logo from "../../assets/logo.png";
 
-function Navbar() {
+function Navbar({ isLoggedIn, setIsLoggedIn }) {
+  const navigate = useNavigate();
+  const [dropdownVisible, setDropdownVisible] = useState(false);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false); // Kullanıcı oturum durumunu sıfırla
+    localStorage.removeItem("user"); // Oturumu temizle
+    navigate("/login"); // Giriş ekranına yönlendir
+  };
+
   return (
     <nav className="navbar">
       {/* Logo */}
@@ -23,13 +32,32 @@ function Navbar() {
         </li>
       </ul>
 
-      {/* Login Butonu */}
-      <div className="login-box">
-        <Link to="/login" className="login-link">
-          <FontAwesomeIcon icon={faSignInAlt} className="login-icon" />
-          Login
-        </Link>
-
+      {/* Ayarlar İkonu veya Login */}
+      <div className="settings-container">
+        {!isLoggedIn ? (
+          <div className="login-box">
+              <Link to="/login" className="login-link">
+            <FontAwesomeIcon icon={faSignInAlt} className="login-icon" />
+            Login
+          </Link>
+          </div>
+        ) : (
+          <div
+            className="settings-icon"
+            onClick={() => setDropdownVisible(!dropdownVisible)}
+          >
+            <FontAwesomeIcon icon={faCog} />
+            {dropdownVisible && (
+              <div className="dropdown-menu">
+                <ul>
+                  <li onClick={() => navigate("/profile")}>Profile</li>
+                  <li onClick={() => navigate("/scores")}>Scores</li>
+                  <li onClick={handleLogout}>Logout</li>
+                </ul>
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </nav>
   );

@@ -114,3 +114,72 @@
     }
   }
   
+  /* Logout Butonu */
+.logout-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  color: #ffe4e9;
+  transform: scale(1.1);
+}
+/* Ayarlar İkonu */
+.settings-container {
+  position: relative;
+}
+
+.settings-icon {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.settings-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Dropdown Menü */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.dropdown-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+}
+
+.dropdown-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+  transition: background 0.3s ease;
+}
+
+.dropdown-menu li:hover {
+  background: #f0f0f0;
+}
+
+/* Responsive Ayarlar */
+@media (max-width: 768px) {
+  .dropdown-menu {
+    right: 10px;
+  }
+}
