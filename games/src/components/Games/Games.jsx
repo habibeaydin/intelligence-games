@@ -2,13 +2,11 @@ import React, { useState } from 'react';
 import Lottie from 'lottie-react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Games.css';
-
-// Lottie Animasyonlarını İçe Aktar
 import MemoryGameAnimation from '../../assets/memory.json';
 import TicTacToeAnimation from '../../assets/ttt.json';
 import SlidingPuzzleAnimation from '../../assets/puzzle.json';
 import WordFindAnimation from '../../assets/word.json';
-import LoadingAnimation from '../../assets/load.json'; // Yükleme animasyonu
+import LoadingAnimation from '../../assets/load.json';
 
 const games = [
   {
@@ -22,16 +20,16 @@ const games = [
   {
     id: 2,
     title: 'Tic Tac Toe',
-    description: 'Classic two-player game. Get three marks in a row to win!',
-    howToPlay: 'Place X or O in an empty spot. First to align three marks wins!',
+    description: 'Challenge yourself against the computer in this classic Tic Tac Toe game!',
+    howToPlay: 'Take turns with the computer. Place X on an empty spot and try to align three in a row before the computer does!',
     animation: TicTacToeAnimation,
     route: '/ticTacToe',
   },
   {
     id: 3,
     title: 'Puzzle',
-    description: 'Rearrange the pieces of the image to solve the puzzle.',
-    howToPlay: 'Slide tiles to arrange them in the correct order.',
+    description: 'Recreate the full image by dragging and dropping the pieces into their correct positions.',
+    howToPlay: 'Drag and drop each piece to its correct position. Complete the puzzle to win!',
     animation: SlidingPuzzleAnimation,
     route: '/puzzle',
   },
@@ -46,7 +44,7 @@ const games = [
 ];
 
 const Games = () => {
-  const [loading, setLoading] = useState(false); // Yükleme durumu
+  const [loading, setLoading] = useState(false); 
   const navigate = useNavigate();
 
   const handlePlayGame = (route) => {
@@ -54,7 +52,7 @@ const Games = () => {
     setTimeout(() => {
       navigate(route);
       setLoading(false);
-    }, 2500); //yükleme süresi
+    }, 2000); 
   };
 
   return (
