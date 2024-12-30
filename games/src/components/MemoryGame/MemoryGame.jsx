@@ -3,7 +3,6 @@ import './MemoryGame.css';
 import Lottie from 'lottie-react';
 import WinAnimation from '../../assets/win.json';
 
-// Kart İkonları
 const cardIcons = ["🥕", "🍓", "🍇", "🍉", "🍒", "🥑"];
 
 const MemoryGame = () => {
@@ -50,14 +49,13 @@ const MemoryGame = () => {
       !cards[index].isMatched
     ) {
       setFlippedCards([...flippedCards, index]);
-  
-      // İkinci kart açıldığında moves sayısını artır
+
+      // İkinci kart açıldığında moves sayısını arttır
       if (flippedCards.length === 1) {
         setMoves((prevMoves) => prevMoves + 1);
       }
     }
   };
-  
 
   // Eşleşme Kontrolü
   useEffect(() => {
@@ -86,36 +84,36 @@ const MemoryGame = () => {
   return (
     <div className="memory-game">
       <h1>Memory Card Game</h1>
-      <div className="game-container"> 
+      <div className="game-container">
         <div className="game-stats">
-        <p>Moves: {moves}</p>
-        <p>Time: {time} sec</p>
-      </div>
-      {gameWon ? (
-        <div className="win-screen">
-          <Lottie animationData={WinAnimation} style={{ height: 200 }} />
-          <h2>Congratulations! You won!</h2>
-          <p>Total Time: {time} seconds</p>
-          <button onClick={resetGame} className="reset-button">
-            Play Again
-          </button>
+          <p>Moves: {moves}</p>
+          <p>Time: {time} sec</p>
         </div>
-      ) : (
-        <div className="card-grid">
-          {cards.map((card, index) => (
-            <div
-              key={index}
-              className={`memory-card ${flippedCards.includes(index) || card.isMatched ? 'flipped' : ''}`}
-              onClick={() => handleFlip(index)}
-            >
-              <div className="card-inner">
-                <div className="card-front">{card.icon}</div>
-                <div className="card-back"></div>
+        {gameWon ? (
+          <div className="win-screen">
+            <Lottie animationData={WinAnimation} style={{ height: 200 }} />
+            <h2>Congratulations! You won!</h2>
+            <p>Total Time: {time} seconds</p>
+            <button onClick={resetGame} className="reset-button">
+              Play Again
+            </button>
+          </div>
+        ) : (
+          <div className="card-grid">
+            {cards.map((card, index) => (
+              <div
+                key={index}
+                className={`memory-card ${flippedCards.includes(index) || card.isMatched ? 'flipped' : ''}`}
+                onClick={() => handleFlip(index)}
+              >
+                <div className="card-inner">
+                  <div className="card-front">{card.icon}</div>
+                  <div className="card-back"></div>
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
