@@ -1,26 +1,44 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Login.css";
 
 const Login = ({ setIsLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    if (!username || !password) {
+      setError("Username and password cannot be empty.");
+      return;
+    }
+
+    setIsLoading(true);
     try {
-      const response = await axios.post("https://localhost:7148/api/user/login", {
+      const response = await axios.post("https://localhost:7148/api/Auth/login", {
         username,
         password,
       });
-      setIsLoggedIn(true); // Oturum durumunu güncelle
+
+      // Token'i localStorage'a kaydet
+      const token = response.data.token;
+      localStorage.setItem("token", token);
+
+      // Giriş durumunu güncelle
+      setIsLoggedIn(true);
       setError("");
-      navigate("/games"); // Kullanıcıyı yönlendir
+
+      // Ana sayfaya yönlendir
+      navigate("/games");
     } catch (err) {
-      setError("Invalid username or password.");
+      setError(err.response?.data?.message || "Invalid username or password.");
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -42,10 +60,13 @@ const Login = ({ setIsLoggedIn }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button type="submit" className="login-button">
-            Login
+          <button type="submit" className="login-button" disabled={isLoading}>
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
+        <p className="login-register-link">
+          Don't have an account? <Link to="/register">Register here</Link>
+        </p>
       </div>
     </div>
   );

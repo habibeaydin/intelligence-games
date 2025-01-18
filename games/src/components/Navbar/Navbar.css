@@ -174,7 +174,16 @@
 }
 
 .dropdown-menu li:hover {
-  background: #f0f0f0;
+  background: #f9f9f9;
+  color: #333;
+  cursor: pointer;
+}
+
+.settings-icon {
+  transition: transform 0.2s ease;
+}
+.settings-icon:hover {
+  transform: rotate(20deg);
 }
 
 /* Responsive Ayarlar */
@@ -183,3 +192,69 @@
     right: 10px;
   }
 }
+
+/* Ayarlar İkonu */
+.settings-icon {
+  font-size: 24px;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* Sadece ikon dönecek */
+}
+
+.settings-icon:hover {
+  transform: rotate(20deg); /* Sadece hover sırasında dönüş */
+}
+
+/* Dropdown Menü */
+.dropdown-menu {
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transform: scale(1); /* Statik durmalı */
+  transition: opacity 0.3s ease, transform 0.3s ease; /* Görünme animasyonu */
+  opacity: 0; /* Başlangıçta görünmez */
+  visibility: hidden; /* Görünmez menü */
+}
+
+.settings-container .dropdown-menu.visible {
+  opacity: 1; /* Görünür menü */
+  visibility: visible; /* Görünür hale gelir */
+}
+
+/* Login Butonu */
+.login-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px; /* İkon ve metin arasındaki boşluk */
+  padding: 10px 20px; /* Buton iç dolgu */
+  font-size: 16px; /* Yazı boyutu */
+  font-weight: bold;
+  color: white;
+  text-decoration: none;
+  border-radius: 50px; /* Buton kenarlarını yuvarla */
+  background: linear-gradient(to right, #ff758c, #db6b9f); /* Gradyan arka plan */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Hafif gölge */
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.login-link:hover {
+  background: linear-gradient(to right, #db6b9f, #ff758c); /* Hover efekti */
+  transform: scale(1.05); /* Hafif büyüme efekti */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Daha büyük gölge */
+}
+
+.login-link:active {
+  transform: scale(0.98); /* Basılma efekti */
+}
+

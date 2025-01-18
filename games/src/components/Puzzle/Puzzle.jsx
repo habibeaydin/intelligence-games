@@ -116,6 +116,14 @@ const Puzzle = () => {
     }
   };
 
+  const resetGame = () => {
+    clearInterval(timerRef.current);
+    setTime(0);
+    setMoves(0);
+    setCompleted(false);
+    generatePieces(); // Parçaları yeniden oluştur ve karıştır
+  };  
+
   return (
     <div className="puzzle">
       <h1>Puzzle</h1>
@@ -152,7 +160,7 @@ const Puzzle = () => {
           <h2>Congratulations! You completed the puzzle!</h2>
           <p>Time: {time} seconds</p>
           <p>Moves: {moves}</p>
-          <button onClick={() => window.location.reload()} className="button reset-button">
+          <button onClick={resetGame} className="button reset-button">
             Play Again
           </button>
         </div>

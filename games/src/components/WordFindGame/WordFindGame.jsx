@@ -19,15 +19,14 @@ const WordFindGame = () => {
   const [time, setTime] = useState(0);
   const [wordCount, setWordCount] = useState(0);
   const [win, setWin] = useState(false);
-  const [currentCorrectLetters, setCurrentCorrectLetters] = useState([]);
+
+  const timerRef = React.useRef(null);
 
   useEffect(() => {
     startNewWord();
     startTimer();
-    return () => clearInterval(timerRef);
+    return () => clearInterval(timerRef.current);
   }, []);
-
-  const timerRef = React.useRef(null);
 
   const startTimer = () => {
     timerRef.current = setInterval(() => {
@@ -54,7 +53,6 @@ const WordFindGame = () => {
     setHint(randomWord.hint);
     setShuffledLetters(shuffleArray(randomWord.word.split('')));
     setSelectedLetters([]);
-    setCurrentCorrectLetters([]);
     setGameOver(false);
   };
 
@@ -65,14 +63,12 @@ const WordFindGame = () => {
 
     if (currentCount < wordCount) {
       setSelectedLetters([...selectedLetters, letter]);
-      const correctLetters = [...currentCorrectLetters, letter];
-      setCurrentCorrectLetters(correctLetters);
     }
   };
 
   const checkWord = () => {
     if (selectedLetters.join('') === word) {
-      if (wordCount + 1 === 5) {
+      if (wordCount + 1 === wordList.length) {
         stopTimer();
         setWin(true);
       } else {
@@ -86,7 +82,6 @@ const WordFindGame = () => {
 
   const resetCurrentWord = () => {
     setSelectedLetters([]);
-    setCurrentCorrectLetters([]);
   };
 
   return (
@@ -102,7 +97,10 @@ const WordFindGame = () => {
             key={index}
             className="word-letter-button"
             onClick={() => handleLetterClick(letter)}
-            disabled={selectedLetters.filter((l) => l === letter).length >= word.split(letter).length}
+            disabled={
+              selectedLetters.filter((l) => l === letter).length >=
+              word.split(letter).length
+            }
           >
             {letter}
           </button>
@@ -114,9 +112,6 @@ const WordFindGame = () => {
             {letter}
           </span>
         ))}
-      </div>
-      <div className="word-correct-letters">
-        <p>Correct Letters: {currentCorrectLetters.join(' ')}</p>
       </div>
       {!gameOver && !win && (
         <div className="word-check-button">
@@ -135,10 +130,17 @@ const WordFindGame = () => {
         <div className="word-game-over">
           <p>Congratulations! You completed all words!</p>
           <p>Your Time: {time} sec</p>
-          <button onClick={startNewWord}>Play Again</button>
+          <button onClick={() => {
+            setWin(false);
+            setWordCount(0);
+            setTime(0);
+            startNewWord();
+          }}>
+            Play Again
+          </button>
         </div>
       )}
-      <div className="word-reset-button">
+      <div className="word-check-button">
         <button onClick={resetCurrentWord}>Reset Current Word</button>
       </div>
     </div>

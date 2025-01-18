@@ -1,0 +1,68 @@
+/* Sayfa Genel Stil */
+.scores-page {
+  text-align: center;
+  background: linear-gradient(to bottom, #f0f8ff, #ffebf0);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.scores-page h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Tablo Konteyneri */
+.scores-table-container {
+  margin: 0 auto;
+  max-width: 800px;
+  overflow-x: auto;
+}
+
+/* Tablo Genel Stil */
+.scores-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: white;
+}
+
+.scores-table th, .scores-table td {
+  border: 1px solid #ddd;
+  padding: 12px;
+  text-align: center;
+}
+
+.scores-table th {
+  background-color: #7ea5ff;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.scores-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.scores-table tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.scores-table td {
+  font-size: 1rem;
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+  .scores-page h1 {
+    font-size: 2rem;
+  }
+
+  .scores-table th, .scores-table td {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}

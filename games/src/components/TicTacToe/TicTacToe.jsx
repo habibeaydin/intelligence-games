@@ -3,6 +3,7 @@ import "./TicTacToe.css";
 import Lottie from "lottie-react";
 import WinAnimation from "../../assets/win.json";
 import DrawAnimation from "../../assets/draw.json";
+import axios from "axios";
 
 const TicTacToe = () => {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -10,6 +11,8 @@ const TicTacToe = () => {
   const [winner, setWinner] = useState(null);
   const [time, setTime] = useState(0);
   const timerRef = useRef(null);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   // Zamanlayıcı
   useEffect(() => {
@@ -72,15 +75,57 @@ const TicTacToe = () => {
       const [a, b, c] = pattern;
       if (board[a] && board[a] === board[b] && board[a] === board[c]) {
         setWinner(board[a]);
+        saveScore(board[a]);
         return;
       }
     }
 
     if (board.every((cell) => cell)) {
       setWinner("Draw");
+      saveScore("Draw");
     }
   };
 
+  const saveScore = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        setError("You must be logged in to save your score.");
+        return;
+      }
+  
+      // Token'dan userId'yi nameidentifier claim'inden al
+      const decodedToken = JSON.parse(atob(token.split(".")[1]));
+      const userId = decodedToken["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"];
+  
+      if (!userId) {
+        setError("Invalid token. User ID not found.");
+        return;
+      }
+  
+      await axios.post(
+        "https://localhost:7148/api/score",
+        {
+          userId: userId, // Dinamik olarak çözümlenen userId kullanılıyor
+          gameName: "Tic Tac Toe",
+          time: time,
+          date: new Date().toISOString(),
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+  
+      setSuccess("Score saved successfully!");
+    } catch (err) {
+      setError("Failed to save score. Please try again.");
+      console.error("Error saving score:", err);
+    }
+  };  
+
+  
   // Oyunu sıfırla
   const resetGame = () => {
     setBoard(Array(9).fill(null));
@@ -88,6 +133,8 @@ const TicTacToe = () => {
     setWinner(null);
     setTime(0);
     clearInterval(timerRef.current);
+    setError("");
+    setSuccess("");
   };
 
   return (
@@ -112,6 +159,8 @@ const TicTacToe = () => {
             <button onClick={resetGame} className="reset-button">
               Play Again
             </button>
+            {success && <p style={{ color: "green" }}>{success}</p>}
+            {error && <p style={{ color: "red" }}>{error}</p>}
           </div>
         ) : (
           <div className="board-grid">

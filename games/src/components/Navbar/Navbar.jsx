@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faSignInAlt } from "@fortawesome/free-solid-svg-icons";
@@ -10,19 +10,29 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
   const [dropdownVisible, setDropdownVisible] = useState(false);
 
   const handleLogout = () => {
-    setIsLoggedIn(false); // Kullanıcı oturum durumunu sıfırla
-    localStorage.removeItem("user"); // Oturumu temizle
-    navigate("/login"); // Giriş ekranına yönlendir
+    setIsLoggedIn(false);
+    localStorage.removeItem("token");
+    navigate("/login");
   };
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (!e.target.closest(".settings-container")) {
+        setDropdownVisible(false);
+      }
+    };
+    document.addEventListener("click", handleOutsideClick);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
 
   return (
     <nav className="navbar">
-      {/* Logo */}
       <div className="logo-container">
         <img src={logo} alt="Logo" className="logo" />
       </div>
 
-      {/* Navbar Linkleri */}
       <ul className="nav-links">
         <li>
           <Link to="/">Home</Link>
@@ -32,30 +42,30 @@ function Navbar({ isLoggedIn, setIsLoggedIn }) {
         </li>
       </ul>
 
-      {/* Ayarlar İkonu veya Login */}
       <div className="settings-container">
         {!isLoggedIn ? (
-          <div className="login-box">
-              <Link to="/login" className="login-link">
+          <Link to="/login" className="login-link">
             <FontAwesomeIcon icon={faSignInAlt} className="login-icon" />
             Login
           </Link>
-          </div>
         ) : (
-          <div
-            className="settings-icon"
-            onClick={() => setDropdownVisible(!dropdownVisible)}
-          >
-            <FontAwesomeIcon icon={faCog} />
-            {dropdownVisible && (
-              <div className="dropdown-menu">
-                <ul>
-                  <li onClick={() => navigate("/profile")}>Profile</li>
-                  <li onClick={() => navigate("/scores")}>Scores</li>
-                  <li onClick={handleLogout}>Logout</li>
-                </ul>
-              </div>
-            )}
+          <div>
+            <div
+              className="settings-icon"
+              onClick={() => setDropdownVisible(!dropdownVisible)}
+            >
+              <FontAwesomeIcon icon={faCog} />
+            </div>
+            <div
+              className={`dropdown-menu ${
+                dropdownVisible ? "visible" : ""
+              }`}
+            >
+              <ul>
+                <li onClick={() => navigate("/scores")}>Scores</li>
+                <li onClick={handleLogout}>Logout</li>
+              </ul>
+            </div>
           </div>
         )}
       </div>
